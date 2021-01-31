@@ -12,10 +12,23 @@ public class MainActivity extends AppCompatActivity {
         System.loadLibrary("native-lib");
     }
 
+    String filesPath = null;
+    String fileName  = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        filesPath = this.getFilesDir().getPath() + "/";
+        fileName  = "Simpson.mp4";
+        new Thread(new Runnable() {
+            @Override
+            public void run()
+            {
+                Utils.CopyAssetFileToDataDataFiles(MainActivity.this, filesPath, fileName);
+                printfInfo(filesPath + fileName);
+            }
+        }).start();
 
         // Example of a call to a native method
         TextView tv = findViewById(R.id.sample_text);
@@ -29,4 +42,5 @@ public class MainActivity extends AppCompatActivity {
      */
     public native String stringFromJNI();
     public native void printfVersion();
+    public native void printfInfo(String name);
 }

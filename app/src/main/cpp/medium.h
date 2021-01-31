@@ -6,4 +6,6 @@
 #define AVPS_MEDIUM_H
 
 void PrintfVersion();
+
+void PrintfInfo(const char *name);
 #endif //AVPS_MEDIUM_H
