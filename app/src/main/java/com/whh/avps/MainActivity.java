@@ -3,15 +3,16 @@ package com.whh.avps;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
     // Used to load the 'native-lib' library on application startup.
     static {
         System.loadLibrary("native-lib");
     }
-
     String filesPath = null;
     String fileName  = null;
 
@@ -20,15 +21,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         filesPath = this.getFilesDir().getPath() + "/";
-        fileName  = "Simpson.mp4";
-        new Thread(new Runnable() {
-            @Override
-            public void run()
-            {
-                Utils.CopyAssetFileToDataDataFiles(MainActivity.this, filesPath, fileName);
-                printfInfo(filesPath + fileName);
-            }
-        }).start();
+        fileName  = "6s_video_sample_1080p60fps.mp4";
+        Log.d(TAG, "name = " + filesPath + fileName);
+
+        //Utils.CopyAssetFileToDataDataFiles(MainActivity.this, filesPath, fileName);
+        printfInfo(filesPath + fileName);
 
         // Example of a call to a native method
         TextView tv = findViewById(R.id.sample_text);
